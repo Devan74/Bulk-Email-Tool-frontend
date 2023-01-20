@@ -8,6 +8,9 @@ const Dashboard = () => {
     const { logindata, setLoginData } = useContext(LoginContext);
 
     const [data, setData] = useState(false);
+    const [emails, setEmails] = useState("");
+    const [subject, setSubject] = useState("");
+    const [content, setContent] = useState("");
 
 
     const history = useNavigate();
@@ -35,16 +38,23 @@ const Dashboard = () => {
     }
     const sendEmail = async (e) => {
         e.preventDefault();
-
-        const res = await fetch("/bulkemailsend", {
+        let token = localStorage.getItem("usersdatatoken");
+        const res = await fetch(`${URL}/bulkemailsend`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": token
             },
-            
+            body: JSON.stringify({
+                emails,
+                subject,
+                content
+            })
+
         });
-        const data1 = await res.json();
-        console.log(data1);
+        const data = await res.json();
+        console.log(data);
+        console.log(token);
     }
 
     useEffect(() => {
@@ -62,19 +72,14 @@ const Dashboard = () => {
                     <div class="d-flex justify-content-center">
                         <from>
                             <div class="mb-3 w-30" >
-                                <label for="exampleFormControlInput1" class="form-label">From</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
-
-                            </div>
-                            <div class="mb-3 w-30">
-                                <label for="exampleFormControlInput1" class="form-label">To</label>
+                                <label for="exampleFormControlInput1" class="form-label">Emails</label>
                                 <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
 
                             </div>
                             <br />
                             <div class="mb-3 w-30">
                                 <label for="exampleFormControlInput1" class="form-label">Subject</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" />
+                                <input type="text" class="form-control" id="exampleFormControlInput1" />
                             </div>
                             <div class="mb-3 w-30">
                                 <label for="exampleFormControlTextarea1" class="form-label">Compose Email</label>
