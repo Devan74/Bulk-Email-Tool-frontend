@@ -10,7 +10,7 @@ const Dashboard = () => {
     const [data, setData] = useState(false);
     const [emails, setEmails] = useState("");
     const [subject, setSubject] = useState("");
-    const [content, setContent] = useState("");
+    const [text, setText] = useState("");
 
 
     const history = useNavigate();
@@ -48,7 +48,7 @@ const Dashboard = () => {
             body: JSON.stringify({
                 emails,
                 subject,
-                content,
+                text,
             })
 
         });
@@ -83,7 +83,7 @@ const Dashboard = () => {
                             </div>
                             <div class="mb-3 w-30">
                                 <label for="exampleFormControlTextarea1" class="form-label">Compose Email</label>
-                                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"onChange={(e) => setContent(e.target.value)}></textarea>
+                                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"onChange={(e) => setText(e.target.value)}></textarea>
                             </div>
                             <button type="submit" onClick={sendEmail} class="btn btn-primary mb-3">Send</button>
                         </from>
