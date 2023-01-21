@@ -23,7 +23,7 @@ const Header = () => {
     };
 
 
-    const logoutuser = async () => {
+    const logoutUser = async () => {
         let token = localStorage.getItem("usersdatatoken");
 
         const res = await fetch(`${URL}/logout`, {
@@ -34,14 +34,14 @@ const Header = () => {
                 "Authorization": token,
                 Accept: "application/json"
             },
-            credentials: "include"
+           
         });
 
         const data = await res.json()        ;
         console.log(data);
 
         if (data.status == 201) {
-            console.log("use logout");
+            console.log("user logout");
             localStorage.removeItem("usersdatatoken");
             setLoginData(false)
             history("/");
@@ -63,7 +63,7 @@ const Header = () => {
             <header>
                 <nav>
                     
-                <NavLink to="/"><h1>Dev Cloud</h1></NavLink>
+                <NavLink to="/"><h1>Email Blaster</h1></NavLink>
                     <div className="avtar">
                         {
                             logindata.ValidUserOne ? <Avatar style={{ background: "salmon", fontWeight: "bold", textTransform: "capitalize" }} onClick={handleClick}>{logindata.ValidUserOne.fname[0].toUpperCase()}</Avatar> :
@@ -89,7 +89,7 @@ const Header = () => {
                                         handleClose()
                                     }}>Profile</MenuItem>
                                     <MenuItem onClick={() => {
-                                        logoutuser()
+                                        logoutUser()
                                         handleClose()
                                     }}>Logout</MenuItem>
                                 </>

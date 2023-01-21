@@ -88,7 +88,7 @@ const ForgotPassword = () => {
                                 <div className="form_heading">
                                     <h1>Enter Your NEW Password</h1>
                                 </div>
-
+                                {message ? <p style={{ color: "green", fontWeight: "bold" }}>Your Email Send Succsfully!!!</p> : ""}
                                 <form>
                                     {message ? <p style={{ color: "green", fontWeight: "bold" }}>Password Succesfully Update </p> : ""}
                                     <div className="form_input">

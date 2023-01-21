@@ -48,13 +48,13 @@ const Dashboard = () => {
             body: JSON.stringify({
                 emails,
                 subject,
-                content
+                content,
             })
 
         });
         const data = await res.json();
         console.log(data);
-        console.log(token);
+        // console.log(token);
     }
 
     useEffect(() => {
@@ -72,22 +72,22 @@ const Dashboard = () => {
                     <div class="d-flex justify-content-center">
                         <from>
                             <div class="mb-3 w-30" >
-                                <label for="exampleFormControlInput1" class="form-label">Emails</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                                <label for="exampleFormControlInput1" class="form-label" >Emails</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"onChange={(e) => setEmails(e.target.value)} />
 
                             </div>
                             <br />
                             <div class="mb-3 w-30">
                                 <label for="exampleFormControlInput1" class="form-label">Subject</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" />
+                                <input type="text" class="form-control" id="exampleFormControlInput1"onChange={(e) => setSubject(e.target.value)} />
                             </div>
                             <div class="mb-3 w-30">
                                 <label for="exampleFormControlTextarea1" class="form-label">Compose Email</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"onChange={(e) => setContent(e.target.value)}></textarea>
                             </div>
                             <button type="submit" onClick={sendEmail} class="btn btn-primary mb-3">Send</button>
                         </from>
-
+            
                     </div>
                 </div>
             </div>
