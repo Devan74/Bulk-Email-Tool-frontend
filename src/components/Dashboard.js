@@ -130,7 +130,7 @@ const Dashboard = () => {
                                 <textarea type="text" class="form-control" id="exampleFormControlTextarea1" value={inpval.text} onChange={setVal}name="text" rows="3" onClick={(e) => setText(e.target.value)}></textarea>
                             </div>
                             <button type="submit" onClick={sendEmail} class="btn btn-primary mb-3">Send</button>
-                            <br/><br/><br/><br/><br/><p><b>Note:</b>One Email To Another Email Put The Comma (  <b>,</b>  )</p>
+                            <br/><br/><br/><br/><br/><p><b>Note:</b>One Email To Another Email Put On The Comma (  <b>,</b>  )</p>
                         </from>
                         <ToastContainer />
                     </div>
