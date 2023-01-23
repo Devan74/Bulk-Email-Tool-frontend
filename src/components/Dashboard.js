@@ -12,6 +12,24 @@ const Dashboard = () => {
     const [subject, setSubject] = useState("");
     const [text, setText] = useState("");
 
+    const [inpval, setInpval] = useState({
+        emails: "",
+        subject: "",
+        text: ""
+    });
+
+    const setVal = (e) => {
+        // console.log(e.target.value);
+        const { name, value } = e.target;
+
+        setInpval(() => {
+            return {
+                ...inpval,
+                [name]: value
+            }
+        })
+    };
+
 
     const history = useNavigate();
 
@@ -40,14 +58,22 @@ const Dashboard = () => {
 
     const sendEmail = async (e) => {
         e.preventDefault();
+        const { emails,subject,text} = inpval;
         let token = localStorage.getItem("usersdatatoken");
-
-        if (emails === "") {
+         if (emails === "") {
             toast.error("email is required!", {
                 position: "top-center"
             });
         } else if (!emails.includes("@")) {
             toast.warning("includes @ in your email!", {
+                position: "top-center"
+            });
+        } else if (subject === "") {
+            toast.warning("subject is required!", {
+                position: "top-center"
+            });
+        } else if (text === "") {
+            toast.warning("text is required!", {
                 position: "top-center"
             });
         } else {
@@ -70,7 +96,7 @@ const Dashboard = () => {
                 toast.success("Your Email Send Successfully done 😃!", {
                     position: "top-center"
                 });
-
+                setInpval({ ...inpval,emails: "",subject: "",text: ""});
             }
         }
     }
@@ -91,17 +117,17 @@ const Dashboard = () => {
                         <from>
                             <div class="mb-3 w-30" >
                                 <label for="exampleFormControlInput1" class="form-label" >Emails</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder='Enter Your Email Address' onChange={(e) => setEmails(e.target.value)} />
+                                <input type="email" class="form-control" id="exampleFormControlInput1" value={inpval.emails} onChange={setVal} name="emails" placeholder='Enter Your Email Address' onClick={(e) => setEmails(e.target.value)} />
 
                             </div>
                             <br />
                             <div class="mb-3 w-30">
                                 <label for="exampleFormControlInput1" class="form-label">Subject</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" onChange={(e) => setSubject(e.target.value)} />
+                                <input type="text" class="form-control" id="exampleFormControlInput1" value={inpval.subject} onChange={setVal} name="subject" onClick={(e) => setSubject(e.target.value)} />
                             </div>
                             <div class="mb-3 w-30">
                                 <label for="exampleFormControlTextarea1" class="form-label">Compose Email</label>
-                                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3" onChange={(e) => setText(e.target.value)}></textarea>
+                                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" value={inpval.text} onChange={setVal}name="text" rows="3" onClick={(e) => setText(e.target.value)}></textarea>
                             </div>
                             <button type="submit" onClick={sendEmail} class="btn btn-primary mb-3">Send</button>
                             <br/><br/><br/><br/><br/><p><b>Note:</b>One Email To Another Email Put The Comma (  <b>,</b>  )</p>
