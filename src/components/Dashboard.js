@@ -97,6 +97,11 @@ const Dashboard = () => {
                     position: "top-center"
                 });
                 setInpval({ ...inpval,emails: "",subject: "",text: ""});
+            }if (res.status === 401) {
+                toast.error("Please Enter The Valid Email???", {
+                    position: "top-center"
+                });
+                
             }
         }
     }
