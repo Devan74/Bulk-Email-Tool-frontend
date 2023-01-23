@@ -73,7 +73,7 @@ const Dashboard = () => {
                 position: "top-center"
             });
         } else if (text === "") {
-            toast.warning("text is required!", {
+            toast.warning("compose your mail", {
                 position: "top-center"
             });
         } else {
@@ -98,7 +98,7 @@ const Dashboard = () => {
                 });
                 setInpval({ ...inpval,emails: "",subject: "",text: ""});
             }if (res.status === 401) {
-                toast.error("Please Enter The Valid Email???", {
+                toast.error("email not send", {
                     position: "top-center"
                 });
                 
